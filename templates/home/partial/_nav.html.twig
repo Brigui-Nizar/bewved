@@ -1,0 +1,17 @@
+<nav class="menu">
+  <a href="{{ path('app_home') }}">Accueil</a>
+  {%if app.user%} {% if is_granted('ROLE_ADMIN') %}
+
+  <a href="#">Liste Des Skills</a>
+  <a href="#">Liste Des Formateurs</a>
+  {%else%}
+  <a href="#">Liste Des Apprenants</a>
+
+  {% endif %}
+
+  <a href="#"><i class="fa-solid fa-door-open"></i></a>
+  <a href="#">admin@mail.com </a>
+  {%else%}
+  <a href="#">Connexion</a>
+  {%endif%}
+</nav>

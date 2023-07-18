@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %} {% block title %}Hello FormerController!{%
+endblock %} {% block body %}
+<main>
+  <h2>Liste des Formateurs</h2>
+  <div class="content">
+    <table>
+      <tr>
+        <th colspan="5">Email</th>
+        <th colspan="2">Action</th>
+      </tr>
+      {% for former in formers %}
+      <tr>
+        <td colspan="5">{{ former }}</td>
+        <td>
+          <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div>
+        </td>
+        <td>
+          <div class="edit"><i class="fa-sharp fa-solid fa-pen"></i></div>
+        </td>
+      </tr>
+
+      {%endfor%}
+    </table>
+  </div>
+  <div class="content">
+    <div class="buttonadd">
+      Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i>
+    </div>
+  </div>
+</main>
+{% endblock %}
