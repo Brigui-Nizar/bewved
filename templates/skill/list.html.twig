@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %} {% block title %}Skills{% endblock %} {% block
+body %}
+<main>
+  <h2>Liste des Compétences</h2>
+  {% for skill in skills %}
+  <div class="content">
+    <table>
+      <tr>
+        <th colspan="5">{{ skill.code }} <button>+</button></th>
+        <th colspan="2">Action</th>
+      </tr>
+
+      {% for skillUser in skill.skills %}
+
+      <tr>
+        <td colspan="5">{{ skillUser.label }}</td>
+        <td>
+          <a href="{{ path('app_former_delete', { id: skill.id }) }}">
+            <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div
+          ></a>
+        </td>
+        <td>
+          <div class="edit"><i class="fa-sharp fa-solid fa-pen"></i></div>
+        </td>
+      </tr>
+      {%endfor%}
+    </table>
+  </div>
+  {%endfor%}
+
+  <div class="content">
+    <a href="{{ path('app_former_create') }}"
+      ><div class="buttonadd">
+        Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i></div
+    ></a>
+  </div>
+</main>
+{% endblock %}

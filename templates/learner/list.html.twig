@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %} {% block title %}Hello FormerController!{%
+endblock %} {% block body %}
+<main>
+  <h2>Liste des Apprenants</h2>
+  <div class="content">
+    <table>
+      <tr>
+        <th colspan="1">Promotion</th>
+        <th colspan="1">Prénom</th>
+        <th colspan="1">Nom</th>
+        <th colspan="2">Action</th>
+      </tr>
+      {% for learner in learners %}
+      <tr>
+        <td colspan="1">{{ learner.prom.label }}</td>
+        <th colspan="1">{{ learner.firstname }}</th>
+        <th colspan="1">{{ learner.lastname }}</th>
+        <td>
+          <a href="{{ path('app_former_delete', { id: learner.id }) }}">
+            <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div
+          ></a>
+        </td>
+        <td>
+          <div class="edit"><i class="fa-sharp fa-solid fa-pen"></i></div>
+        </td>
+      </tr>
+
+      {%endfor%}
+    </table>
+  </div>
+  <div class="content">
+    <a href="{{ path('app_former_create') }}"
+      ><div class="buttonadd">
+        Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i></div
+    ></a>
+  </div>
+</main>
+{% endblock %}

@@ -2,10 +2,10 @@
   <a href="{{ path('app_home') }}">Accueil</a>
   {%if app.user%} {% if is_granted('ROLE_ADMIN') %}
 
-  <a href="#">Liste Des Skills</a>
+  <a href="{{ path('app_skill_index') }}">Liste Des Skills</a>
   <a href="{{ path('app_former_index') }}">Liste Des Formateurs</a>
   {%else%}
-  <a href="#">Liste Des Apprenants</a>
+  <a href="{{ path('app_learner_index') }}">Liste Des Apprenants</a>
 
   {% endif %}
 
