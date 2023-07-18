@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %} {% block title %}Hello FormerController!{%
+endblock %} {% block body %}
+<main>
+  <h2>Détail</h2>
+  <div class="content"><p>Promotion : {{ learner.prom.label }}</p>
+  </div>
+  <p>id : {{ learner.id }}</p>
+  <p>Nom : {{ learner.lastname }}</p>
+  <p>Prénom : {{ learner.firstname }}</p>
+  <p>Age : {{ learner.age }}</p>
+  <p>
+  {%if learner.gender == 'm'%}  Homme {%else%} Femme {%endif%} </p>
+  <p>Competences : <ul> {% for skill in learner.skills %} <li>{{skill.label}}</li>{%endfor%}</ul></p>
+  
+</main>
+{% endblock %}

@@ -13,10 +13,14 @@ endblock %} {% block body %}
       {% for learner in learners %}
       <tr>
         <td colspan="1">{{ learner.prom.label }}</td>
-        <th colspan="1">{{ learner.firstname }}</th>
+        <th colspan="1">
+          <a href="{{ path('app_learner_getOne', { id: learner.id }) }}">{{
+            learner.firstname
+          }}</a>
+        </th>
         <th colspan="1">{{ learner.lastname }}</th>
         <td>
-          <a href="{{ path('app_former_delete', { id: learner.id }) }}">
+          <a href="{{ path('app_learner_delete', { id: learner.id }) }}">
             <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div
           ></a>
         </td>
@@ -29,9 +33,9 @@ endblock %} {% block body %}
     </table>
   </div>
   <div class="content">
-    <a href="{{ path('app_former_create') }}"
+    <a href="{{ path('app_learner_create') }}"
       ><div class="buttonadd">
-        Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i></div
+        Ajouter un apprenant<i class="fa-sharp fa-solid fa-plus"></i></div
     ></a>
   </div>
 </main>
