@@ -2,28 +2,69 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FormerController extends AbstractController
 {
     #[Route('/former', name: 'app_former_index')]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
+        $formers = $userRepository->findAll();
+
         return $this->render('former/former.html.twig', [
-            'formers' => ['john@mail.com', 'yoda@mail.com'],
+            'formers' => $formers,
         ]);
     }
 
-    #[Route('/skills', name: 'app_former_skill')]
-    public function skill(): Response
+    /**
+     * create former
+     */
+    #[Route('/former/create', name: 'app_former_create')]
+    public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
-        return $this->render('former/former.html.twig', [
-            'skills' => [[
-                'label' => 'Compétences Front',
-                'skill' => ['id' => 1, 'label' => 'CSS']
-            ]],
-        ]);
+        $former = new User;
+
+        $form = $this->createForm(UserType::class, $former);
+
+        $form->handleRequest($request);
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('former/createformer.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+        $former = $form->getData();
+
+        $former->setPassword(
+            $hasher->hashPassword(
+                $former,
+                $former->getPassword()
+            )
+        );
+        $former->setRoles(['ROLE_USER']);
+        $entityManager->persist($former);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_former_index');
+    }
+
+    /**
+     * former delete
+     */
+    #[Route('/former/delete/{id}', name: 'app_former_delete')]
+    public function delete(User $user, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_former_index');
     }
 }

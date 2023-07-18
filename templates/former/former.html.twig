@@ -10,9 +10,11 @@ endblock %} {% block body %}
       </tr>
       {% for former in formers %}
       <tr>
-        <td colspan="5">{{ former }}</td>
+        <td colspan="5">{{ former.email }}</td>
         <td>
-          <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div>
+          <a href="{{ path('app_former_delete', { id: former.id }) }}">
+            <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div
+          ></a>
         </td>
         <td>
           <div class="edit"><i class="fa-sharp fa-solid fa-pen"></i></div>
@@ -23,9 +25,10 @@ endblock %} {% block body %}
     </table>
   </div>
   <div class="content">
-    <div class="buttonadd">
-      Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i>
-    </div>
+    <a href="{{ path('app_former_create') }}"
+      ><div class="buttonadd">
+        Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i></div
+    ></a>
   </div>
 </main>
 {% endblock %}

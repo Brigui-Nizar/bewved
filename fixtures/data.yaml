@@ -1,0 +1,76 @@
+#creation de learners
+App\Entity\Learner:
+  learner01:
+    lastname: Skywalker
+    firstname: Luke
+    age: 76
+    gender: m
+    prom: "@promo1"
+    skills:
+      - "@skill1"
+      - "@skill2"
+  learner02:
+    lastname: Doe
+    firstname: Jane
+    age: 22
+    gender: f
+    prom: "@promo1"
+  learner03:
+    lastname: DaVinci
+    firstname: Leonardo
+    age: 39
+    gender: m
+    prom: "@promo1"
+    skills:
+      - "@skill1"
+      - "@skill2"
+      - "@skill3"
+      - "@skill4"
+      - "@skill5"
+      - "@skill6"
+#creation de promotions
+App\Entity\Prom:
+  promo1:
+    label: CDA-20230701
+
+#creation de skillGroup
+App\Entity\SkillGroup:
+  skillgroup1:
+    code: "Compétences Front"
+  skillgroup2:
+    code: "Compétences Back"
+  skillgroup3:
+    code: "Compétences Infra"
+
+#creation de skill
+App\Entity\Skill:
+  skill1:
+    label: "Bootstrap"
+    skillGroup: "@skillgroup1"
+  skill2:
+    label: "Css"
+    skillGroup: "@skillgroup1"
+  skill3:
+    label: "React Js"
+    skillGroup: "@skillgroup1"
+
+  skill4:
+    label: "Python"
+    skillGroup: "@skillgroup2"
+  skill5:
+    label: "SQL"
+    skillGroup: "@skillgroup2"
+  skill6:
+    label: "PHP"
+    skillGroup: "@skillgroup2"
+
+#creation de user
+App\Entity\User:
+  admin:
+    password: \$2y\$13\$KsIg7zTlAVFhVOO3h15Or.ewKb6yxGpkDe0n.4k1TeH6WK9ZtZOuy
+    email: admin@mail.com
+    roles: ["ROLE_USER", "ROLE_ADMIN"]
+  former1:
+    password: \$2y\$13\$KsIg7zTlAVFhVOO3h15Or.ewKb6yxGpkDe0n.4k1TeH6WK9ZtZOuy
+    email: joe@mail.com
+    roles: ["ROLE_USER"]
