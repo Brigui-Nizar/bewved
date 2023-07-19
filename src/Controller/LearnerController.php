@@ -8,6 +8,7 @@ use App\Entity\Prom;
 use App\Form\LearnerSearchCriteriaType;
 use App\Form\LearnerType;
 use App\Repository\LearnerRepository;
+use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,7 +66,7 @@ class LearnerController extends AbstractController
 
 
     #[Route('/learner/group/{id}', name: 'app_learner_generate')]
-    public function generate(Prom $prom, Request $request, LearnerRepository $learnerRepository): Response
+    public function generate(Prom $prom, Request $request, LearnerRepository $learnerRepository, SkillRepository $skillRepository): Response
     {
         $form = $this->createForm(LearnerSearchCriteriaType::class, null, ['method' => 'GET',]);
         $form->handleRequest($request);
@@ -87,6 +88,12 @@ class LearnerController extends AbstractController
 
         //search all learner and sort by gender
         $learners = $learnerRepository->findBy(['prom' => $prom],  $setOder);
+
+        //search all skills
+
+
+        $skills = $skillRepository->findSkillByUsersProm($prom);
+        dump($skills);
 
         $groups = array_chunk($learners,  $length);
 
