@@ -176,19 +176,18 @@ class LearnerController extends AbstractController
 
         if ($isMixite) {
 
-            $groups = array_chunk($learners,  $length);
+            $groups = array_chunk($learners,  (int)(count($learners) / $length) + 1);
             $groupByAge = [];
             $groupByAge2 = [];
             for ($i = 0; $i < count($groups[0]); $i++) { // group[0] length
-                foreach ($groups as  $key => $value) {
-                    if (isset($value[$i])) {
-                        $groupByAge[$key] = $value[$i];
-                        // array_push($groupByAge, $value[$i]);
+                foreach ($groups as  $key => $group) {
+                    if (isset($group[$i])) {
+                        $groupByAge[$key] = $group[$i];
                     }
                 }
                 array_push($groupByAge2, $groupByAge);
             }
-            $groups = array_chunk($groupByAge,  $length);
+            $groups = $groupByAge2;
         }
 
         return $this->render('learner/group.html.twig', [

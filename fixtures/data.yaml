@@ -35,8 +35,8 @@ App\Entity\Learner:
     gender: f
     prom: "@promo1"
     skills:
-      - "@skill1"
-      - "@skill2"
+      - "@skill<numberBetween(1, 6)>"
+      - "@skill<numberBetween(1, 6)>"
   learner_m_generated{1..10}:
     lastname: <lastName()>
     firstname: <firstname()>
@@ -44,8 +44,8 @@ App\Entity\Learner:
     gender: m
     prom: "@promo1"
     skills:
-      - "@skill1"
-      - "@skill2"
+      - "@skill<numberBetween(1, 6)>"
+      - "@skill<numberBetween(1, 6)>"
   learnergr2_f_generated{1..7}:
     lastname: <lastName()>
     firstname: <firstname()>
@@ -53,8 +53,8 @@ App\Entity\Learner:
     gender: f
     prom: "@promo2"
     skills:
-      - "@skill1"
-      - "@skill2"
+      - "@skill<numberBetween(1, 6)>"
+      - "@skill<numberBetween(1, 6)>"
   learnergr2_m_generated{1..10}:
     lastname: <lastName()>
     firstname: <firstname()>
@@ -62,8 +62,8 @@ App\Entity\Learner:
     gender: m
     prom: "@promo2"
     skills:
-      - "@skill1"
-      - "@skill2"
+      - "@skill<numberBetween(1, 6)>"
+      - "@skill<numberBetween(1, 6)>"
 #creation de promotions
 App\Entity\Prom:
   promo1:
