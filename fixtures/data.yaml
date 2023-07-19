@@ -28,10 +28,30 @@ App\Entity\Learner:
       - "@skill4"
       - "@skill5"
       - "@skill6"
+  learner_f_generated{1..10}:
+    lastname: <lastName()>
+    firstname: <firstname()>
+    age: <numberBetween(18, 75)>
+    gender: f
+    prom: "@promo1"
+    skills:
+      - "@skill1"
+      - "@skill2"
+  learner_m_generated{1..10}:
+    lastname: <lastName()>
+    firstname: <firstname()>
+    age: <numberBetween(18, 75)>
+    gender: m
+    prom: "@promo1"
+    skills:
+      - "@skill1"
+      - "@skill2"
 #creation de promotions
 App\Entity\Prom:
   promo1:
     label: CDA-20230701
+  promo2:
+    label: DWWM
 
 #creation de skillGroup
 App\Entity\SkillGroup:

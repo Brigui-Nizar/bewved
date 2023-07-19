@@ -2,6 +2,9 @@
 endblock %} {% block body %}
 <main>
   <h2>Liste des Apprenants</h2>
+  <a href="{{ path('app_learner_generate', { id: 3 }) }}">
+    Generer mes groupe
+  </a>
   <div class="content">
     <table>
       <tr>
@@ -12,7 +15,12 @@ endblock %} {% block body %}
       </tr>
       {% for learner in learners %}
       <tr>
-        <td colspan="1">{{ learner.prom.label }}</td>
+        <td colspan="1">
+          <a
+            href="{{ path('app_learner_generate', { id: learner.prom.id }) }}"
+            >{{ learner.prom.label }}</a
+          >
+        </td>
         <th colspan="1">
           <a href="{{ path('app_learner_getOne', { id: learner.id }) }}">{{
             learner.firstname

@@ -162,3 +162,15 @@ main div.buttonadd {
     justify-content: space-around;
 
 }
+
+a span.small {
+    background-color: var(--color-gold);
+    text-align: center;
+    cursor: pointer;
+    padding: 1rem 1rem 1rem 1rem;
+    width: 80%;
+    display: flex;
+    font-weight: bolder;
+    justify-content: space-around;
+
+}

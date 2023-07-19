@@ -55,7 +55,7 @@ class LearnerType extends AbstractType
             ))
             ->add('submit', SubmitType::class, [
                 'label' => 'Creer',
-            ]);;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

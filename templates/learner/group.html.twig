@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %} {% block title %}Hello FormerController!{%
+endblock %} {% block body %}
+<main>
+  <h2>Mes Groupes</h2>
+  <h2>{{ prom.label }}</h2>
+  <span>{{ count }} Apprenants</span>
+
+  <div class="content">{% include 'learner/partial/_filter.html.twig' %}</div>
+
+  {% set groupNumber = 1 %} {% for group in groups %}
+  <div class="content">
+    Group n° {{ groupNumber }}
+    {% set groupNumber = groupNumber + 1 %}
+    <table>
+      <tr>
+        <th colspan="1">nb</th>
+        <th colspan="1">Promotion</th>
+        <th colspan="1">Prénom</th>
+        <th colspan="1">Nom</th>
+        <th colspan="1">Genre</th>
+      </tr>
+      {% set numberInGroup = 1 %} {% for learner in group %}
+      <tr>
+        <td colspan="1">{{ numberInGroup }}</td>
+        {% set numberInGroup = numberInGroup + 1 %}
+        <td colspan="1">{{ learner.prom.label }}</td>
+        <th colspan="1">
+          <a href="{{ path('app_learner_getOne', { id: learner.id }) }}">{{
+            learner.firstname
+          }}</a>
+        </th>
+        <th colspan="1">{{ learner.lastname }}</th>
+        <td colspan="1">{{ learner.gender }}</td>
+      </tr>
+
+      {%endfor%}
+    </table>
+  </div>
+  {%endfor%}
+</main>
+{% endblock %}

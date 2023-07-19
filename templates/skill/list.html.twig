@@ -6,7 +6,13 @@ body %}
   <div class="content">
     <table>
       <tr>
-        <th colspan="5">{{ skill.code }} <button>+</button></th>
+        <th colspan="5">
+          {{ skill.code }}
+          <a href="{{ path('app_skill_createWithId', { id: skill.id }) }}"
+            ><i class="fa-sharp fa-solid fa-plus"></i
+          ></a>
+        </th>
+        <th colspan="1">Action</th>
         <th colspan="2">Action</th>
       </tr>
 
@@ -15,7 +21,7 @@ body %}
       <tr>
         <td colspan="5">{{ skillUser.label }}</td>
         <td>
-          <a href="{{ path('app_former_delete', { id: skill.id }) }}">
+          <a href="{{ path('app_skill_delete', { id: skillUser.id }) }}">
             <div class="delete"><i class="fa-sharp fa-solid fa-trash"></i></div
           ></a>
         </td>
@@ -29,9 +35,9 @@ body %}
   {%endfor%}
 
   <div class="content">
-    <a href="{{ path('app_former_create') }}"
+    <a href="{{ path('app_skill_createSkillGroup') }}"
       ><div class="buttonadd">
-        Ajouter un Formateur<i class="fa-sharp fa-solid fa-plus"></i></div
+        Ajouter un skill<i class="fa-sharp fa-solid fa-plus"></i></div
     ></a>
   </div>
 </main>

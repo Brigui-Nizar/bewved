@@ -4,11 +4,9 @@
 
   <a href="{{ path('app_skill_index') }}">Liste Des Skills</a>
   <a href="{{ path('app_former_index') }}">Liste Des Formateurs</a>
-  {%else%}
-  <a href="{{ path('app_learner_index') }}">Liste Des Apprenants</a>
 
   {% endif %}
-
+  <a href="{{ path('app_learner_index') }}">Liste Des Apprenants</a>
   <a href="{{ path('app_logout') }}"><i class="fa-solid fa-door-open"></i></a>
   <a href="#">{{ app.user.email }} </a>
   {%else%}

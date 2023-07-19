@@ -5,6 +5,8 @@ namespace App\Form;
 use App\DTO\LearnerSearchCriteria;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +16,14 @@ class LearnerSearchCriteriaType extends AbstractType
     {
         $criteria = $options['empty_data'];
         $builder
-            ->add('genre', CheckboxType::class, [
+            ->add('size', NumberType::class, [
+                'required' => false,
+                'empty_data' => $criteria->size,
+
+            ])->add('genre', CheckboxType::class, [
                 'required' => false,
                 'empty_data' => $criteria->genre,
+
             ])
             ->add('age', CheckboxType::class, [
                 'required' => false,
@@ -25,12 +32,17 @@ class LearnerSearchCriteriaType extends AbstractType
             ->add('skill', CheckboxType::class, [
                 'required' => false,
                 'empty_data' => $criteria->skill,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'va chercher',
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'csrf_protection' => false,
+            'method' => 'GET',
             'data_class' => LearnerSearchCriteria::class,
             'data' => new LearnerSearchCriteria(),
             'empty_data' => new LearnerSearchCriteria(),
