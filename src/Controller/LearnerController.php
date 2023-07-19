@@ -102,12 +102,44 @@ class LearnerController extends AbstractController
             return $array;
         }
         //
-        $azerty = $learnersFCount + 2;
-        $learners = array_move_elem($learners, 3, $azerty);
-
-
         $length = $form['size']->getData();
-        $groupsCount = count(array_chunk($learners,  $length));
+        $mixite = $form['genre']->getData();
+
+
+        //deplace woman  
+        $toPos = count($learners) - 1;
+        $grpTemp = array_chunk($learners,  $length);
+        $groupsCount = count($grpTemp);
+
+        $actualgroupId = $groupsCount - 1;
+        $womanInGroup = 0;
+        if ($mixite) {
+            //determine le nombre de femme ENTIERE par groupe
+            if ($learnersFCount % $groupsCount == 0) {
+                $calcNbWomanInGrp = ((int)$learnersFCount / $groupsCount);
+            } else {
+                $calcNbWomanInGrp = ((int)$learnersFCount / $groupsCount) - 1;
+            }
+            if ($calcNbWomanInGrp <= 0) {
+                $calcNbWomanInGrp = 0;
+            }
+            for ($i = $learnersFCount - 1; $i > 0; $i--) {
+                //le nombre de femme est< au nombre de groupe
+                if ($toPos > 1 && $calcNbWomanInGrp >= $womanInGroup) {
+                    $learners = array_move_elem($learners, $i, $toPos);
+                    $womanInGroup = $womanInGroup + 1;
+                }
+
+                if ($calcNbWomanInGrp > $womanInGroup) {
+                    $toPos = $toPos -  1;
+                } else {
+                    $toPos = $toPos  -  (count($grpTemp[$actualgroupId]) - $calcNbWomanInGrp);
+                    $womanInGroup = 0;
+                    $actualgroupId = $actualgroupId - 1;
+                }
+            };
+        }
+
 
         $groups = array_chunk($learners,  $length);
         // if (!$form->isSubmitted() || !$form->isValid()) {
