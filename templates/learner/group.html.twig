@@ -1,5 +1,5 @@
-{% extends 'base.html.twig' %} {% block title %}Hello FormerController!{%
-endblock %} {% block body %}
+{% extends 'base.html.twig' %} {% block title %}Création de groupe{% endblock %}
+{% block body %}
 <main>
   <h2>Mes Groupes</h2>
   <h2>{{ prom.label }}</h2>
@@ -18,6 +18,7 @@ endblock %} {% block body %}
         <th colspan="1">Prénom</th>
         <th colspan="1">Nom</th>
         <th colspan="1">Genre</th>
+        <th colspan="1">Age</th>
       </tr>
       {% set numberInGroup = 1 %} {% for learner in group %}
       <tr>
@@ -31,6 +32,7 @@ endblock %} {% block body %}
         </th>
         <th colspan="1">{{ learner.lastname }}</th>
         <td colspan="1">{{ learner.gender }}</td>
+        <td colspan="1">{{ learner.age }}</td>
       </tr>
 
       {%endfor%}

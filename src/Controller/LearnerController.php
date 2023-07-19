@@ -67,15 +67,36 @@ class LearnerController extends AbstractController
     #[Route('/learner/group/{id}', name: 'app_learner_generate')]
     public function generate(Prom $prom, Request $request, LearnerRepository $learnerRepository): Response
     {
-        //search all learner and sort by gender
-        $learners = $learnerRepository->findBy(['prom' => $prom], ['gender' => 'ASC']);
-        //sear and count female
-        $learnersF = $learnerRepository->findBy(['prom' => $prom, 'gender' => 'f'], ['gender' => 'ASC']);
-        $learnersFCount = count($learnersF);
 
 
         $form = $this->createForm(LearnerSearchCriteriaType::class, null, ['method' => 'GET',]);
         $form->handleRequest($request);
+
+        $length = $form['size']->getData();
+        $isMixite = $form['genre']->getData();
+        $isAge = $form['age']->getData();
+
+
+
+        $setOder = [];
+        if ($isMixite) {
+            $setOder = array_merge($setOder, ['gender' => 'ASC']);
+        }
+        if ($isAge) {
+            $setOder = array_merge($setOder, ['age' => 'ASC']);
+        }
+        if (!$isMixite && !$isAge) {
+            $setOder = ['gender' => 'ASC'];
+        }
+
+        //search all learner and sort by gender
+        $learners = $learnerRepository->findBy(['prom' => $prom],  $setOder);
+        //sear and count female
+        $learnersF = $learnerRepository->findBy(['prom' => $prom, 'gender' => 'f'], ['gender' => 'ASC']);
+        $learnersFCount = count($learnersF);
+        //search all learner and sort by age
+        // $learnersAge = $learnerRepository->findBy(['prom' => $prom], ['age' => 'ASC']);
+
 
         // source https://www.php.net/manual/fr/ref.array.php
         function array_move_elem($array, $from, $to)
@@ -102,8 +123,6 @@ class LearnerController extends AbstractController
             return $array;
         }
         //
-        $length = $form['size']->getData();
-        $mixite = $form['genre']->getData();
 
 
         //deplace woman  
@@ -113,7 +132,8 @@ class LearnerController extends AbstractController
 
         $actualgroupId = $groupsCount - 1;
         $womanInGroup = 0;
-        if ($mixite) {
+        //if ($isMixite) {
+        if (false) {
             //determine le nombre de femme ENTIERE par groupe
             if ($learnersFCount % $groupsCount == 0) {
                 $calcNbWomanInGrp = ((int)$learnersFCount / $groupsCount);
@@ -139,33 +159,45 @@ class LearnerController extends AbstractController
                 }
             };
         }
-
-
         $groups = array_chunk($learners,  $length);
-        // if (!$form->isSubmitted() || !$form->isValid()) {
+
+        if ($isAge) {
+            $groups = array_chunk($learners,  (int)(count($learners) / $length));
+            $groupByAge = [];
+            for ($i = 0; $i < count($groups[0]); $i++) { // group[0] length
+                foreach ($groups as  $key => $value) {
+                    if (isset($value[$i])) {
+                        array_push($groupByAge, $value[$i]);
+                    }
+                }
+            }
+            $groups = array_chunk($groupByAge,  $length);
+        }
+
+        if ($isMixite) {
+
+            $groups = array_chunk($learners,  $length);
+            $groupByAge = [];
+            $groupByAge2 = [];
+            for ($i = 0; $i < count($groups[0]); $i++) { // group[0] length
+                foreach ($groups as  $key => $value) {
+                    if (isset($value[$i])) {
+                        $groupByAge[$key] = $value[$i];
+                        // array_push($groupByAge, $value[$i]);
+                    }
+                }
+                array_push($groupByAge2, $groupByAge);
+            }
+            $groups = array_chunk($groupByAge,  $length);
+        }
+
         return $this->render('learner/group.html.twig', [
             'prom' => $prom,
             'count' => count($learners),
             'form' => $form->createView(),
-            'learners' => $learners,
             'groups' => $groups,
         ]);
-
-
-
-
-
-
-        /*   $learners = $learnerRepository->findAll();
-
-        return $this->render('learner/group.html.twig', [
-            'learners' => $learners,
-        ]); */
     }
-
-
-
-
 
     /**
      * Learner getOne
