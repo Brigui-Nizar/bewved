@@ -47,11 +47,26 @@ class SkillRepository extends ServiceEntityRepository
     //    }
     public function findSkillByUsersProm($prom): ?array
     {
-        return $this->createQueryBuilder('skill')
+        /*   return $this->createQueryBuilder('skill')
             ->leftJoin('skill.learners', 'learner')
             ->andWhere('learner.prom = :prom')
             ->setParameter(':prom', $prom)
             ->getQuery()
             ->getResult();
+    } */
+
+        return $this->createQueryBuilder('skill')
+            ->leftJoin('skill.learners', 'learner')
+            ->andWhere('learner.prom = :prom')
+            ->setParameter(':prom', $prom)
+            ->leftJoin('skill.skillGroup', 'skillGroup')
+            ->leftJoin('learner.prom', 'prom')
+            ->orderBy('skill.id', 'DESC')
+            ->addSelect('learner')
+            ->addSelect('skill')
+            ->addSelect('prom')
+            //       ->Select('count(skillGroup.id)')
+            ->getQuery()
+            ->getArrayResult(); //->getResult();
     }
 }

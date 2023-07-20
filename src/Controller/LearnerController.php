@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\DTO\LearnerSearchCriteria;
 use App\Entity\Learner;
 use App\Entity\Prom;
+use App\Entity\Skill;
 use App\Form\LearnerSearchCriteriaType;
 use App\Form\LearnerType;
 use App\Repository\LearnerRepository;
@@ -14,7 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 class LearnerController extends AbstractController
 {
     #[Route('/learner', name: 'app_learner_index')]
@@ -22,6 +25,14 @@ class LearnerController extends AbstractController
     {
         $learners = $learnerRepository->findAll();
 
+        return $this->render('learner/list.html.twig', [
+            'learners' => $learners,
+        ]);
+    }
+    #[Route('/learner/prom/{prom}', name: 'app_learner_indexFiltered')]
+    public function indexFiltered(Prom $prom = null, LearnerRepository $learnerRepository): Response
+    {
+        $learners = $learnerRepository->findByProm($prom);
         return $this->render('learner/list.html.twig', [
             'learners' => $learners,
         ]);
@@ -66,35 +77,22 @@ class LearnerController extends AbstractController
 
 
     #[Route('/learner/group/{id}', name: 'app_learner_generate')]
-    public function generate(Prom $prom, Request $request, LearnerRepository $learnerRepository, SkillRepository $skillRepository): Response
+    public function generate(Prom $prom, Request $request, LearnerRepository $learnerRepository): Response
     {
         $form = $this->createForm(LearnerSearchCriteriaType::class, null, ['method' => 'GET',]);
         $form->handleRequest($request);
 
-        $length = $form['size']->getData();
-        $isMixite = $form['genre']->getData();
-        $isAge = $form['age']->getData();
+        $searchCriteria = $form->getData();
+        /**
+         * @var LearnerSearchCriteria  $searchCriteria
+         */
+        $length = $searchCriteria->size;
+        $isMixite = $searchCriteria->genre;
+        $isAge = $searchCriteria->age;
 
-        $setOder = [];
-        if ($isMixite) {
-            $setOder = array_merge($setOder, ['gender' => 'ASC']);
-        }
-        if ($isAge) {
-            $setOder = array_merge($setOder, ['age' => 'ASC']);
-        }
-        if (!$isMixite && !$isAge) {
-            $setOder = null;
-        }
-
-        //search all learner and sort by gender
-        $learners = $learnerRepository->findBy(['prom' => $prom],  $setOder);
-
-        //search all skills
-
-
-        $skills = $skillRepository->findSkillByUsersProm($prom);
-        dump($skills);
-
+        //search all learner and sort by LearnerSearchCriteria::class
+        $learners = $learnerRepository->findLearnerByUsersPromOrberBySearchCriteria($prom,  $searchCriteria);
+        dump($learners);
         $groups = array_chunk($learners,  $length);
 
         if ($isMixite) {

@@ -13,7 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 class SkillController extends AbstractController
 {
     #[Route('/skill', name: 'app_skill_index')]
@@ -111,6 +113,7 @@ class SkillController extends AbstractController
     /**
      * former delete
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/skill/delete/{id}', name: 'app_skill_delete')]
     public function delete(Skill $skill, EntityManagerInterface $entityManager): Response
     {

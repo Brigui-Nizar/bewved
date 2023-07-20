@@ -36,7 +36,6 @@ App\Entity\Learner:
     prom: "@promo1"
     skills:
       - "@skill<numberBetween(1, 6)>"
-      - "@skill<numberBetween(1, 6)>"
   learner_m_generated{1..10}:
     lastname: <lastName()>
     firstname: <firstname()>
@@ -44,7 +43,6 @@ App\Entity\Learner:
     gender: m
     prom: "@promo1"
     skills:
-      - "@skill<numberBetween(1, 6)>"
       - "@skill<numberBetween(1, 6)>"
   learnergr2_f_generated{1..7}:
     lastname: <lastName()>

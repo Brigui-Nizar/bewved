@@ -11,7 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 class FormerController extends AbstractController
 {
     #[Route('/former', name: 'app_former_index')]
@@ -27,6 +29,7 @@ class FormerController extends AbstractController
     /**
      * create former
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/former/create', name: 'app_former_create')]
     public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
@@ -59,6 +62,7 @@ class FormerController extends AbstractController
     /**
      * former delete
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/former/delete/{id}', name: 'app_former_delete')]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {

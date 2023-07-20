@@ -19,6 +19,7 @@
         <th colspan="1">Nom</th>
         <th colspan="1">Genre</th>
         <th colspan="1">Age</th>
+        <th colspan="2">skillsGroup</th>
       </tr>
       {% set numberInGroup = 1 %} {% for learner in group %}
       <tr>
@@ -33,6 +34,14 @@
         <th colspan="1">{{ learner.lastname }}</th>
         <td colspan="1">{{ learner.gender }}</td>
         <td colspan="1">{{ learner.age }}</td>
+        <td colspan="2">
+          {% for skill in learner.skills %}
+
+          <span>{{ skill.skillGroup.code }}</span>
+
+          {%endfor%}
+          <hr />
+        </td>
       </tr>
 
       {%endfor%}
