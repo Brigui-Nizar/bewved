@@ -19,22 +19,36 @@ class LearnerSearchCriteriaType extends AbstractType
             ->add('size', NumberType::class, [
                 'required' => false,
                 'empty_data' => $criteria->size,
+                'label'=>'Taille du groupe'
 
             ])->add('genre', CheckboxType::class, [
                 'required' => false,
                 'empty_data' => $criteria->genre,
+                'label'=>'genre',
+                'attr' => [
+                    'class' => 'checkboxbutton',
+                ],'label_attr' => ['class' => 'checkboxlabel']
+                
 
             ])
             ->add('age', CheckboxType::class, [
                 'required' => false,
                 'empty_data' => $criteria->age,
+                'label'=>'age',
+                'attr' => [
+                    'class' => 'checkboxbutton',
+                ],'label_attr' => ['class' => 'checkboxlabel']
             ])
             ->add('skill', CheckboxType::class, [
                 'required' => false,
                 'empty_data' => $criteria->skill,
+                'label'=>'compétence',
+                'attr' => [
+                    'class' => 'checkboxbutton',
+                ],'label_attr' => ['class' => 'checkboxlabel']
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'va chercher',
+                'label' => 'Créer',
             ]);
     }
 

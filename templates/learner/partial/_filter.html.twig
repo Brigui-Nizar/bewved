@@ -1,15 +1,16 @@
-<nav class="filter">
-  <!--  <span>filtrer : </span>
-  <button>sexe</button>
-  <button>Age</button>
-  <button>Competence</button>
-  <input type="text" placeholder="{{ app.request.get('id') }}" />
-  <pre> groupe Id : {{ app.request.get("id") }}</pre>
-  <pre> taille du groupe : {{ app.request.get("size") }}</pre>
-  <pre> genre : {{ app.request.get("genre") }}</pre>
-  <pre> age : {{ app.request.get("age") }}</pre>
-  <pre> Competence : {{ app.request.get("skill") }}</pre> -->
-  <div class="content">
-    {{ form(form) }}
-  </div>
+
+  <nav class="filter">
+ {#    {{ form(form) }} #}
+ {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.size) }}
+    {{ form_row(form.age) }}
+    {{ form_row(form.genre) }}
+    {{ form_row(form.skill) }}
+
+    {{ form_row(form.submit) }}
+{{ form_end(form) }}
+ 
 </nav>
+<script src="/js/script.js/" ></script>

@@ -92,7 +92,6 @@ class LearnerController extends AbstractController
 
         //search all learner and sort by LearnerSearchCriteria::class
         $learners = $learnerRepository->findLearnerByUsersPromOrberBySearchCriteria($prom,  $searchCriteria);
-        dump($learners);
         $groups = array_chunk($learners,  $length);
 
         if ($isMixite) {

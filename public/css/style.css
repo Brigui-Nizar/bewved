@@ -131,23 +131,23 @@ body table {
     padding: 0.1rem 0.5rem 0.1rem 0.5rem;
 }
 
-nav.filter form > div {
+nav.filter form>div {
     display: flex;
     width: 150%;
     justify-content: space-around;
 }
 
-nav.filter form > div > div{
+nav.filter form>div>div {
     display: flex;
     align-content: center;
     align-items: center;
 }
 
-nav.filter form > div label  {
+nav.filter form>div label {
     margin-right: 1rem;
 }
 
-nav.filter form > div button  {
+nav.filter form>div button {
     padding: 0.5rem;
     font-size: large;
     border-radius: 5px;
@@ -157,6 +157,7 @@ input[type=checkbox] {
     width: 100%;
     padding: 12px 20px;
 }
+
 td {
     width: 1rem;
     padding: 0.1rem 0rem 0.1rem 0rem;
@@ -201,4 +202,23 @@ a span.small {
     font-weight: bolder;
     justify-content: space-around;
 
+}
+
+main nav.filter form {
+    display: flex;
+}
+
+label.checkboxlabel {
+    border: solid 1px black;
+}
+
+main nav.filter form input[type="checkbox"] {
+    display: none;
+}
+
+.checkboxlabelcheck {
+
+    background: rgb(20, 246, 87);
+    color: black;
+    border: solid 1px rgb(240, 0, 0);
 }
