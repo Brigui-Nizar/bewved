@@ -64,12 +64,22 @@ App\Entity\Learner:
     skills:
       - "@skill<numberBetween(1, 6)>"
       - "@skill<numberBetween(1, 6)>"
+  learner_m_generated{11..21}:
+    lastname: <lastName()>
+    firstname: <firstname()>
+    age: <numberBetween(18, 75)>
+    gender: m
+    prom: "@promo3"
+    skills:
+      - "@skill<numberBetween(7, 8)>"
 #creation de promotions
 App\Entity\Prom:
   promo1:
     label: CDA-20230701
   promo2:
     label: DWWM-20230701
+  promo3:
+    label: NULL-20230701
 
 #creation de skillGroup
 App\Entity\SkillGroup:
@@ -79,6 +89,8 @@ App\Entity\SkillGroup:
     code: "Compétences Back"
   skillgroup3:
     code: "Compétences Infra"
+  skillgroup4:
+    code: "Flémmard"
 
 #creation de skill
 App\Entity\Skill:
@@ -104,6 +116,14 @@ App\Entity\Skill:
   skill7:
     label: "test"
     skillGroup: "@skillgroup1"
+
+  skill8:
+    label: "copier coller"
+    skillGroup: "@skillgroup4"
+  skill9:
+    label: "ChatGpt"
+    skillGroup: "@skillgroup4"
+    
 #creation de user
 App\Entity\User:
   admin:
