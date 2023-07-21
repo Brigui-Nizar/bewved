@@ -92,6 +92,10 @@ class LearnerController extends AbstractController
 
         //search all learner and sort by LearnerSearchCriteria::class
         $learners = $learnerRepository->findLearnerByUsersPromOrberBySearchCriteria($prom,  $searchCriteria);
+        //
+        if (count($learners)<=10){
+          return $this->redirectToroute('app_learner_create');
+        }
         $groups = array_chunk($learners,  $length);
 
         if ($isMixite) {
