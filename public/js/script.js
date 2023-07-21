@@ -8,11 +8,12 @@ for (let i = 0; i < checkboxs.length; i++) {
 
   function checkboxsbutton(){
   for (let i = 0; i < checkboxs.length; i++) {
-     if (checkboxs[i].checked == 1){
+    checkboxs[i].checked == 1?labels[i].classList.add('checkboxlabelcheck'):labels[i].classList.remove('checkboxlabelcheck')
+    /*  if (checkboxs[i].checked == 1){
             labels[i].classList.add('checkboxlabelcheck')
         }else{
             labels[i].classList.remove('checkboxlabelcheck')
-        } 
+        }  */
   }
 }
 checkboxsbutton()
