@@ -71,7 +71,7 @@ App\Entity\Learner:
     gender: m
     prom: "@promo3"
     skills:
-      - "@skill<numberBetween(7, 8)>"
+      - "@skill<numberBetween(8, 9)>"
 #creation de promotions
 App\Entity\Prom:
   promo1:

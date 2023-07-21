@@ -16,7 +16,7 @@ endblock %} {% block body %}
       </tr>
       {% for prom in proms %}
       <tr>
-         <td colspan="5">  <a href="{{ path('app_learner_indexFiltered', { prom: prom.id }) }}">{{ prom.label }}</a></td>
+         <td colspan="5">  <a href="{{ path('app_learner_generate', { id: prom.id }) }}">{{ prom.label }}</a></td>
         <td></td>
         <td>        </td>
       </tr>
