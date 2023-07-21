@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class PromController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/prom', name: 'app_prom_index')]
     public function index(PromRepository $promRepository): Response
     {
