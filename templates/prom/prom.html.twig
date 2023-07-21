@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %} {% block title %}Liste des promo{%
+endblock %} {% block body %}
+<main>
+  <h2>Liste des promotions</h2>
+    <div class="content">
+    <a href="{{ path('app_prom_create') }}"
+      ><div class="buttonadd">
+        Ajouter une promotion<i class="fa-sharp fa-solid fa-plus"></i></div
+    ></a>
+  </div>
+  <div class="content">
+    <table>
+      <tr>
+        <th colspan="5">promotion</th>
+        <th colspan="2">Action</th>
+      </tr>
+      {% for prom in proms %}
+      <tr>
+        <td colspan="5">{{ prom.label }}</td>
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+
+      {%endfor%}
+    </table>
+  </div>
+
+</main>
+{% endblock %}

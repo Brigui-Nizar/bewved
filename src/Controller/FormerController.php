@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Prom;
 use App\Entity\User;
+use App\Form\PromType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;

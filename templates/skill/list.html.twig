@@ -2,6 +2,12 @@
 body %}
 <main>
   <h2>Liste des Compétences</h2>
+    <div class="content">
+    <a href="{{ path('app_skill_createSkillGroup') }}"
+      ><div class="buttonadd">
+        Ajouter un skill<i class="fa-sharp fa-solid fa-plus"></i></div
+    ></a>
+  </div>
   {% for skill in skills %}
   <div class="content">
     <table>
@@ -34,11 +40,6 @@ body %}
   </div>
   {%endfor%}
 
-  <div class="content">
-    <a href="{{ path('app_skill_createSkillGroup') }}"
-      ><div class="buttonadd">
-        Ajouter un skill<i class="fa-sharp fa-solid fa-plus"></i></div
-    ></a>
-  </div>
+
 </main>
 {% endblock %}
