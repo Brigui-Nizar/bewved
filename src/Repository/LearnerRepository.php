@@ -73,11 +73,8 @@ class LearnerRepository extends ServiceEntityRepository
             ->leftJoin('skill.skillGroup', 'skillGroup')
             ->leftJoin('learner.prom', 'prom');
 
-
-
         if ($learnerSearchCriteria->skill) {
             $qb
-                // ->orderBy('skill.id', 'ASC');
                 ->orderBy('skillGroup.id', 'ASC');
         }
         if ($learnerSearchCriteria->genre) {
